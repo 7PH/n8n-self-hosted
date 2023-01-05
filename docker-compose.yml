@@ -2,9 +2,10 @@ version: '3.8'
 
 
 services:
-    # /n8n
     n8n:
         container_name: n8n
+        cap_drop:
+            - ALL
         ports:
             - 80:80
         build:
@@ -13,8 +14,8 @@ services:
                 DOCKER_USER: "${DOCKER_USER}"
                 DOCKER_UID: "${DOCKER_UID}"
                 DOCKER_GID: "${DOCKER_GID}"
-        labels:
-            - "traefik.enable=true"
+        env_file:
+            - .env
         volumes:
             - ./credentials/:/app/credentials:rw
             - ./workflows/:/app/workflows:rw

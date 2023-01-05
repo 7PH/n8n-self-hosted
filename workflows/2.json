@@ -1,6 +1,6 @@
 {
   "createdAt": "2023-01-02T10:29:34.090Z",
-  "updatedAt": "2023-01-05T01:12:55.194Z",
+  "updatedAt": "2023-01-05T01:14:44.000Z",
   "id": 2,
   "name": "internal/import",
   "active": false,
@@ -28,6 +28,19 @@
       ],
       "typeVersion": 1,
       "id": "699de5bc-17fc-4383-b060-3890fa70bf67"
+    },
+    {
+      "parameters": {
+        "command": "npx n8n import:credentials --separate --input=credentials"
+      },
+      "name": "Import Credentials",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [
+        860,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "51a48ad2-1744-4a60-a3f3-78c11b8fefe8"
     }
   ],
   "connections": {
@@ -44,7 +57,13 @@
     },
     "Import Workflows": {
       "main": [
-        []
+        [
+          {
+            "node": "Import Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -52,7 +71,7 @@
   "staticData": null,
   "dataLoaded": false,
   "pinData": {},
-  "versionId": "f79b1bbb-ad69-4ef9-8e11-786289a59e05",
+  "versionId": "ee13fa9e-3eef-4745-a33b-5b67fa5b5deb",
   "triggerCount": 0,
   "tags": [
     {
