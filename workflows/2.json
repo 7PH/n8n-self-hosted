@@ -1,0 +1,65 @@
+{
+  "createdAt": "2023-01-02T10:29:34.090Z",
+  "updatedAt": "2023-01-05T01:12:55.194Z",
+  "id": 2,
+  "name": "internal/import",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "command": "npx n8n import:workflow --separate --input=workflows"
+      },
+      "name": "Import Workflows",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [
+        640,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "cfe2c85d-c2c1-4257-b030-a5344db4b46a"
+    },
+    {
+      "parameters": {},
+      "name": "Manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        420,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "699de5bc-17fc-4383-b060-3890fa70bf67"
+    }
+  ],
+  "connections": {
+    "Manual": {
+      "main": [
+        [
+          {
+            "node": "Import Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import Workflows": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "dataLoaded": false,
+  "pinData": {},
+  "versionId": "f79b1bbb-ad69-4ef9-8e11-786289a59e05",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "createdAt": "2023-01-05T01:06:59.751Z",
+      "updatedAt": "2023-01-05T01:06:59.751Z",
+      "id": "1",
+      "name": "internal"
+    }
+  ]
+}

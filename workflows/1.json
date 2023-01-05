@@ -1,0 +1,84 @@
+{
+  "createdAt": "2023-01-02T00:19:13.600Z",
+  "updatedAt": "2023-01-05T01:12:55.175Z",
+  "id": 1,
+  "name": "internal/export",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        420,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "73c27b8d-ab34-4d23-a185-4264bfdbe715"
+    },
+    {
+      "parameters": {
+        "command": "npx n8n export:workflow --backup --output workflows/"
+      },
+      "name": "Export Workflows",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [
+        620,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "828b629c-e366-4103-ab9e-ba6c1de46fe3"
+    },
+    {
+      "parameters": {
+        "command": "npx n8n export:credentials --backup --output credentials/"
+      },
+      "name": "Export Credentials",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [
+        820,
+        340
+      ],
+      "typeVersion": 1,
+      "id": "a92b5fe2-355c-4e2a-b10c-db4fbae6d872"
+    }
+  ],
+  "connections": {
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Export Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Export Workflows": {
+      "main": [
+        [
+          {
+            "node": "Export Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "dataLoaded": false,
+  "pinData": {},
+  "versionId": "09186ef8-98d7-4a5f-9b3f-d88abb1df862",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "createdAt": "2023-01-05T01:06:59.751Z",
+      "updatedAt": "2023-01-05T01:06:59.751Z",
+      "id": "1",
+      "name": "internal"
+    }
+  ]
+}
