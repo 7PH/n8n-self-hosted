@@ -6,22 +6,17 @@ services:
         image: traefik:v2.9
         container_name: traefik
         command:
-            - "--log.level=DEBUG"
             - "--entrypoints.n8n.address=:${PUBLIC_PORT}"
             - "--providers.docker=true"
             - "--providers.docker.exposedbydefault=false"
-            - "--providers.file.directory=/configuration/"
-            - "--providers.file.watch=true"
+            - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+            - "--certificatesresolvers.letsencrypt.acme.email=${ADMIN_EMAIL}"
+            - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
         ports:
             - "${PUBLIC_PORT}:${PUBLIC_PORT}"
-        environment:
-            PUBLIC_HOST: "${PUBLIC_HOST}"
-            PUBLIC_PROTOCOL: "${PUBLIC_PROTOCOL}"
-            PUBLIC_PORT: "${PUBLIC_PORT}"
-            ADMIN_EMAIL: "${ADMIN_EMAIL}"
         volumes:
+            - "./letsencrypt:/letsencrypt"
             - /var/run/docker.sock:/var/run/docker.sock:ro
-            - ./traefik.yml:/configuration/dynamic.yml:ro
     
     n8n:
         container_name: n8n
@@ -40,7 +35,9 @@ services:
             - ./workflows/:/app/workflows:rw
         labels:
             - "traefik.enable=true"
-            - "traefik.http.services.n8n.loadbalancer.server.port=80"
             - "traefik.http.routers.n8n.rule=Host(`${PUBLIC_HOST}`)"
+            - "traefik.http.routers.n8n.entrypoints=n8n"
             - "traefik.http.routers.n8n.tls=${USE_TLS}"
             - "traefik.http.routers.n8n.tls.certresolver=letsencrypt"
+            - "traefik.http.middlewares.n8n.basicauth.users=${BASIC_AUTH}"
+            - "traefik.http.routers.n8n.middlewares=n8n@docker"
