@@ -1,0 +1,14 @@
+entryPoints:
+    web:
+        address: ":80"
+    websecure:
+        address: ":443"
+
+certificatesResolvers:
+    letsencrypt:
+        acme:
+            email: ${ADMIN_EMAIL}
+            storage: acme.json
+            httpChallenge:
+                # Used during the challenge
+                entryPoint: web

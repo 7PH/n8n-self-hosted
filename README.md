@@ -1,6 +1,6 @@
 # Self-hosted N8N
 
-This repository is a starter-pack to get a self-hosted N8N instance with:
+This repository is a starter-pack to get a self-hosted [N8N](https://n8n.io) instance with:
 - A containerized setup (docker)
 - An export/import workflow to export/import current workflows and credentials to local folders
 - A persistent encryption key to keep your credentials across losing your container
