@@ -15,6 +15,10 @@ services:
         ports:
             - "${PUBLIC_PORT}:${PUBLIC_PORT}"
         read_only: true
+        cap_drop:
+          - ALL
+        cap_add:
+          - NET_BIND_SERVICE
         volumes:
             - "./letsencrypt:/letsencrypt"
             - /var/run/docker.sock:/var/run/docker.sock:ro
