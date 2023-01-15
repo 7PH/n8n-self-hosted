@@ -14,6 +14,7 @@ services:
             - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
         ports:
             - "${PUBLIC_PORT}:${PUBLIC_PORT}"
+        read_only: true
         volumes:
             - "./letsencrypt:/letsencrypt"
             - /var/run/docker.sock:/var/run/docker.sock:ro
