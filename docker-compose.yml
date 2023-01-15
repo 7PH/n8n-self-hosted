@@ -15,6 +15,7 @@ services:
         ports:
             - "${PUBLIC_PORT}:${PUBLIC_PORT}"
         read_only: true
+        user: "${DOCKER_UID}:${DOCKER_GID}"
         cap_drop:
           - ALL
         cap_add:
