@@ -1,0 +1,25 @@
+http:
+    # Routers
+    routers:
+        n8n:
+            service: n8n@file
+            entrypoints: n8n
+            rule: "Host(`{{ env "PUBLIC_HOST" }}`) && PathPrefix(`/`)"
+            {{ if env "USE_TLS" }}
+            tls:
+                certResolver: letsencrypt
+            {{ end }}
+            middlewares:
+                - simpleauth
+    # Middlewares
+    middlewares:
+        simpleauth:
+            basicAuth:
+                users:
+                    - "{{ env "BASIC_AUTH" }}"
+    # Link services to docker containers
+    services:
+        n8n:
+            loadBalancer:
+                servers:
+                    - url: "http://n8n"
